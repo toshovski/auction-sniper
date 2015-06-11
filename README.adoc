@@ -1,0 +1,13 @@
+= goos-template
+
+Project template for GOOS example
+
+This repository contains a gradle build with all dependencies.
+
+== Generating Eclipse Project Files
+
+ ./gradlew eclipse
+
+== Build And Run Tests
+
+  ./gradlew build

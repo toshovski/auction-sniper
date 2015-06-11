@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply from: 'gradle/extraTestSourceSets.gradle'
+repositories {
+	mavenCentral()
+}
+dependencies {
+	compile 'jivesoftware:smack:3.1.0'
+	compile 'jivesoftware:smackx:3.1.0'
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.hamcrest:hamcrest-library:1.3'
+	acceptanceTestCompile ('com.googlecode.windowlicker:windowlicker-swing:r268') {
+		exclude module: 'hamcrest-all'
+	}
+}
+
+task ensureSourceFoldersExist() {
+	doLast {
+		def allSourceDirs = sourceSets.collect{ it.allSource.srcDirs }.flatten()
+		allSourceDirs.findAll{ !it.exists() }.each { missingSrcDir ->
+			println "creating $missingSrcDir"
+			missingSrcDir.mkdirs()
+		}
+	}
+}
+eclipseClasspath.dependsOn ensureSourceFoldersExist
+
