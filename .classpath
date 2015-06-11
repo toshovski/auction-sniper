@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/acceptanceTest/java"/>
+	<classpathentry kind="src" path="src/acceptanceTest/resources"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
-	<classpathentry kind="src" path="src/acceptanceTest/java"/>
-	<classpathentry kind="src" path="src/acceptanceTest/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
-	<classpathentry kind="lib" path="/Users/balex4o/.gradle/caches/modules-2/files-2.1/jivesoftware/smack/3.1.0/916a0fe08d840a08c950f49fb59b961e14d673b8/smack-3.1.0.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/balex4o/.gradle/caches/modules-2/files-2.1/jivesoftware/smackx/3.1.0/ba1365c7e5f3cf7f7641b354677b3f54a6ea5a15/smackx-3.1.0.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/balex4o/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/a6c32b40bf3d76eca54e3c601e5d1470c86fcdfa/junit-4.12-sources.jar" kind="lib" path="/Users/balex4o/.gradle/caches/modules-2/files-2.1/junit/junit/4.12/2973d150c0dc1fefe998f834810d68f278ea58ec/junit-4.12.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/balex4o/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-library/1.3/47a7ee46628ab7133129cd7cef1e92657bc275e/hamcrest-library-1.3-sources.jar" kind="lib" path="/Users/balex4o/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-library/1.3/4785a3c21320980282f9f33d0d1264a69040538f/hamcrest-library-1.3.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/balex4o/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/1dc37250fbc78e23a65a67fbbaf71d2e9cbc3c0b/hamcrest-core-1.3-sources.jar" kind="lib" path="/Users/balex4o/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/balex4o/.gradle/caches/modules-2/files-2.1/com.googlecode.windowlicker/windowlicker-swing/r268/626416d50ad7d55205b9d18fbafe0c2d3220d68b/windowlicker-swing-r268-sources.jar" kind="lib" path="/Users/balex4o/.gradle/caches/modules-2/files-2.1/com.googlecode.windowlicker/windowlicker-swing/r268/d9fcc16d749872f045be0f7c6894584667a0bfc6/windowlicker-swing-r268.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/balex4o/.gradle/caches/modules-2/files-2.1/com.googlecode.windowlicker/windowlicker-core/r268/96a06b1ab2194329616ee46bcb531e46a2137199/windowlicker-core-r268-sources.jar" kind="lib" path="/Users/balex4o/.gradle/caches/modules-2/files-2.1/com.googlecode.windowlicker/windowlicker-core/r268/c9c8dc4e5e0bd433ad8ad054d05dfb648324bf83/windowlicker-core-r268.jar" exported="true"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
