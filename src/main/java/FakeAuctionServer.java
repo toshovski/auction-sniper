@@ -4,7 +4,9 @@ import java.util.concurrent.TimeUnit;
 import org.hamcrest.Matchers;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
+import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
@@ -20,7 +22,11 @@ public class FakeAuctionServer {
 
 	public FakeAuctionServer(String auctionId) {
 		this.setAuctionId(auctionId);
-		connection = new XMPPConnection(Constants.XMPP_HOST);
+		
+		 ConnectionConfiguration connConfig = new ConnectionConfiguration(Constants.XMPP_HOST);
+		 connConfig.setSASLAuthenticationEnabled(false);
+		 connection = new XMPPConnection(connConfig);
+		    
 	}
 
 	public void startSellingItem() throws XMPPException {
