@@ -1,16 +1,17 @@
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import org.hamcrest.Matchers;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
-import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
-import org.junit.Assert;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 
 public class FakeAuctionServer {
@@ -33,8 +34,6 @@ public class FakeAuctionServer {
 		connection.connect();
 		connection.login(String.format(Constants.AUCTION_ID, auctionId), Constants.AUCTION_PASSWORD);
 		connection.getChatManager().addChatListener(new ChatManagerListener() {
-			
-
 
 			@Override
 			public void chatCreated(Chat chat, boolean createdLocally) {
@@ -71,11 +70,14 @@ public class FakeAuctionServer {
 		ArrayBlockingQueue<Message> messages = new ArrayBlockingQueue<>(1);
 		@Override
 		public void processMessage(Chat arg0, Message message) {
+			System.out.println("Message recieved! "+ message);
 			messages.add(message);
 		}
 		
 		public void recievesMessage() throws InterruptedException{
-			Assert.assertThat("Message",messages.poll(5,TimeUnit.SECONDS),Matchers.is(Matchers.notNullValue()));
+			System.out.println("recieves Message");
+			System.out.println(messages.size());
+			assertThat("Message", messages.poll(5,TimeUnit.SECONDS), is(notNullValue()));
 		}
 		
 	}

@@ -1,4 +1,3 @@
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
@@ -13,7 +12,7 @@ public class AuctionSniperDriver extends JFrameDriver {
 	}
 
 	public void showSniperStatus(Status statusText) {
-		new JLabelDriver(this, named(Main.MAIN_WINDOW_NAME)).hasText(Matchers.equalTo(statusText.getText()));
+		new JLabelDriver(this, named(MainWindow.SNIPER_STATUS_NAME)).hasText(Matchers.equalTo(statusText.getText()));
 	}
 
 	public void dispose() {
