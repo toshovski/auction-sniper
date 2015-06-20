@@ -9,7 +9,7 @@ dependencies {
 	compile 'jivesoftware:smackx:3.1.0'
 	testCompile 'org.jmock:jmock-junit4:2.8.1'
 	testCompile 'junit:junit:4.12'
-	testCompile 'org.hamcrest:hamcrest-library:1.3'
+	compile 'org.hamcrest:hamcrest-library:1.3'
 	acceptanceTestCompile ('com.googlecode.windowlicker:windowlicker-swing:r268') {
 		exclude module: 'hamcrest-all'
 	}
