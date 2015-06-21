@@ -1,3 +1,4 @@
+package auctionsniper.acceptanceTest;
 import org.junit.After;
 import org.junit.Test;
 
