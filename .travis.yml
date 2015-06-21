@@ -1,0 +1,20 @@
+language: java
+
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - ./setup_openfire.sh
+
+script: ./gradlew clean build
+
+jdk:
+  - oraclejdk8
+
+env:
+  - TERM=dumb
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls
+
+after_script:
+  - kill $(cat server/openfire.pid)
