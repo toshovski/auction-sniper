@@ -1,3 +1,4 @@
+package auctionsniper;
 
 public class Constants {
 	final static String SNIPER = "sniper";

@@ -1,3 +1,4 @@
+package auctionsniper;
 
 public enum Status {
  JOINING("Joining"),LOST("Lost"), BIDDING("Bidding");

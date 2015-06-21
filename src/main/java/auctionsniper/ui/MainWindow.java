@@ -1,8 +1,12 @@
+package auctionsniper.ui;
 import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import auctionsniper.Main;
+import auctionsniper.Status;
 
 public class MainWindow extends JFrame{
 	public static final String SNIPER_STATUS_NAME = "sniper status";

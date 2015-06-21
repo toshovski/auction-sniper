@@ -1,6 +1,10 @@
 import org.junit.After;
 import org.junit.Test;
 
+import auctionsniper.ApplicationRunner;
+import auctionsniper.Constants;
+import auctionsniper.FakeAuctionServer;
+
 public class AuctionSniperEndToEndTest {
 	FakeAuctionServer auction = new FakeAuctionServer("54321");
 	ApplicationRunner application = new ApplicationRunner();

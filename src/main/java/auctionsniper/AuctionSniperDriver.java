@@ -1,9 +1,12 @@
+package auctionsniper;
 import org.hamcrest.Matchers;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JFrameDriver;
 import com.objogate.wl.swing.driver.JLabelDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
+
+import auctionsniper.ui.MainWindow;
 
 public class AuctionSniperDriver extends JFrameDriver {
 

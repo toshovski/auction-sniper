@@ -1,3 +1,4 @@
+package auctionsniper;
 
 import static org.junit.Assert.assertThat;
 
