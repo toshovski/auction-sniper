@@ -1,6 +1,6 @@
 
 public enum Status {
- JOINING("Joining"),LOST("Lost");
+ JOINING("Joining"),LOST("Lost"), BIDDING("Bidding");
  
  	private String text;
 

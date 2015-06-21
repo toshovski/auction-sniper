@@ -7,8 +7,16 @@ public class AuctionSniperEndToEndTest {
 @Test
 public void sniperJoinsActionUntilActionCloses() throws Exception {
 	auction.startSellingItem();
+	
 	application.startBiddingIn(auction);
-	auction.hasReceivedJoinRequestFromSniper();
+	auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);
+	System.out.println("Report price");
+	auction.reportPrice(1000,98,"other bidder");
+	
+	application.hasShownSniperIsBidding();
+	
+	System.out.println("New bit received");
+	auction.hasReceivedBid(1098, Constants.SNIPER);
 	auction.announceClosed();
 	application.showSniperHasLostAuction();
 }

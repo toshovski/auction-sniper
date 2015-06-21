@@ -1,21 +1,24 @@
 sourceSets {
-    acceptanceTest {
+    endtoendTest {
         compileClasspath += sourceSets.main.output
         runtimeClasspath += sourceSets.main.output
-        runtimeClasspath += sourceSets.acceptanceTest.output
+        runtimeClasspath += sourceSets.endtoendTest.output
     }
 }
+
 dependencies {
-    acceptanceTestCompile configurations.testCompile
-    acceptanceTestRuntime configurations.testRuntime
+    endtoendTestCompile configurations.testCompile
+    endtoendTestRuntime configurations.testRuntime
 }
-task acceptanceTest(type: Test) {
-    testClassesDir = sourceSets.acceptanceTest.output.classesDir
-    classpath = sourceSets.acceptanceTest.runtimeClasspath
+
+task endtoendTest(type: Test) {
+    testClassesDir = sourceSets.endtoendTest.output.classesDir
+    classpath = sourceSets.endtoendTest.runtimeClasspath
     mustRunAfter test
-    reports.html.destination = file("$buildDir/reports/acceptanceTest")
+    reports.html.destination = file("$buildDir/reports/endtoendTest")
 }
-check.dependsOn acceptanceTest
+
+check.dependsOn endtoendTest
 
 //
 // eclipse plugin needs some extra configuration:
@@ -23,13 +26,14 @@ check.dependsOn acceptanceTest
 configurations{
     projectInternalDependencies
 }
+
 dependencies {
     projectInternalDependencies sourceSets.main.output
 }
+
 eclipse {
     classpath {
-        plusConfigurations += [ configurations.acceptanceTestCompile, configurations.acceptanceTestRuntime ]
+        plusConfigurations += [ configurations.endtoendTestCompile, configurations.endtoendTestRuntime ]
         minusConfigurations += [ configurations.projectInternalDependencies ]
     }
 }
-
