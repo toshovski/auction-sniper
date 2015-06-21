@@ -1,6 +1,6 @@
-package auctionsniper;
+package auctionsniper.acceptanceTest;
 
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import org.hamcrest.Matcher;
 import org.jivesoftware.smack.Chat;
@@ -10,9 +10,10 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+
+import auctionsniper.Constants;
+import auctionsniper.Main;
 
 
 public class FakeAuctionServer {

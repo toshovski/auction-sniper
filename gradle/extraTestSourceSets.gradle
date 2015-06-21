@@ -1,21 +1,39 @@
 sourceSets {
-    acceptanceTest {
+    endtoendTest {
         compileClasspath += sourceSets.main.output
         runtimeClasspath += sourceSets.main.output
-        runtimeClasspath += sourceSets.acceptanceTest.output
+        runtimeClasspath += sourceSets.endtoendTest.output
+    }
+    endtoendFailingTest {
+        compileClasspath += sourceSets.endtoendTest.output
+        runtimeClasspath += sourceSets.endtoendTest.output
+        runtimeClasspath += sourceSets.endtoendFailingTest.output
     }
 }
+
 dependencies {
-    acceptanceTestCompile configurations.testCompile
-    acceptanceTestRuntime configurations.testRuntime
+    endtoendTestCompile configurations.testCompile
+    endtoendTestRuntime configurations.testRuntime
+    endtoendFailingTestCompile configurations.endtoendTestCompile
+    endtoendFailingTestRuntime configurations.endtoendTestRuntime
 }
-task acceptanceTest(type: Test) {
-    testClassesDir = sourceSets.acceptanceTest.output.classesDir
-    classpath = sourceSets.acceptanceTest.runtimeClasspath
+
+task endtoendTest(type: Test) {
+    testClassesDir = sourceSets.endtoendTest.output.classesDir
+    classpath = sourceSets.endtoendTest.runtimeClasspath
     mustRunAfter test
-    reports.html.destination = file("$buildDir/reports/acceptanceTest")
+    reports.html.destination = file("$buildDir/reports/endtoendTest")
 }
-check.dependsOn acceptanceTest
+
+task endtoendFailingTest(type: Test) {
+    testClassesDir = sourceSets.endtoendFailingTest.output.classesDir
+    classpath = sourceSets.endtoendFailingTest.runtimeClasspath
+    mustRunAfter endtoendTest
+    reports.html.destination = file("$buildDir/reports/endtoendFailingTest")
+}
+
+check.dependsOn endtoendTest
+check.dependsOn endtoendFailingTestClasses
 
 //
 // eclipse plugin needs some extra configuration:
@@ -23,12 +41,14 @@ check.dependsOn acceptanceTest
 configurations{
     projectInternalDependencies
 }
+
 dependencies {
     projectInternalDependencies sourceSets.main.output
 }
+
 eclipse {
     classpath {
-        plusConfigurations += [ configurations.acceptanceTestCompile, configurations.acceptanceTestRuntime ]
+        plusConfigurations += [ configurations.endtoendFailingTestCompile, configurations.endtoendFailingTestRuntime ]
         minusConfigurations += [ configurations.projectInternalDependencies ]
     }
 }

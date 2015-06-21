@@ -1,5 +1,5 @@
-package auctionsniper;
-import static org.junit.Assert.assertThat;
+package auctionsniper.acceptanceTest;
+import static org.junit.Assert.*;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -9,8 +9,7 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class SingleMessageListener implements MessageListener{
 	ArrayBlockingQueue<Message> messages = new ArrayBlockingQueue<>(1);

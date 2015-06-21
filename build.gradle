@@ -1,5 +1,18 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
 apply from: 'gradle/extraTestSourceSets.gradle'
 
 repositories {
@@ -8,6 +21,10 @@ repositories {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
+}
+
+tasks.coveralls {
+  dependsOn 'build'
 }
 
 dependencies {
@@ -32,3 +49,17 @@ task ensureSourceFoldersExist() {
     }
 }
 eclipseClasspath.dependsOn ensureSourceFoldersExist
+
+jacocoTestReport {
+    group = 'Reporting'
+    description = 'Generate Jacoco coverage reports after running tests.'
+    additionalSourceDirs = project.files(sourceSets.main.allSource.srcDirs)
+    sourceDirectories = project.files(sourceSets.main.allSource.srcDirs)
+    classDirectories =  project.files(sourceSets.main.output)
+    executionData += files("${buildDir}/jacoco/endtoendTest.exec")
+    reports {
+        xml.enabled = true
+        csv.enabled = false
+        html.enabled = true
+    }
+}

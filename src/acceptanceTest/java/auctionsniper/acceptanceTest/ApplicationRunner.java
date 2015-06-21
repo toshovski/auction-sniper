@@ -1,4 +1,8 @@
-package auctionsniper;
+package auctionsniper.acceptanceTest;
+
+import auctionsniper.Constants;
+import auctionsniper.Main;
+import auctionsniper.Status;
 
 public class ApplicationRunner {
 

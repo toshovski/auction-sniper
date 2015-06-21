@@ -1,11 +1,13 @@
-package auctionsniper;
-import org.hamcrest.Matchers;
+package auctionsniper.acceptanceTest;
+import  static org.hamcrest.Matchers.*;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JFrameDriver;
 import com.objogate.wl.swing.driver.JLabelDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
 
+import auctionsniper.Main;
+import auctionsniper.Status;
 import auctionsniper.ui.MainWindow;
 
 public class AuctionSniperDriver extends JFrameDriver {
@@ -15,7 +17,7 @@ public class AuctionSniperDriver extends JFrameDriver {
 	}
 
 	public void showSniperStatus(Status statusText) {
-		new JLabelDriver(this, named(MainWindow.SNIPER_STATUS_NAME)).hasText(Matchers.equalTo(statusText.getText()));
+		new JLabelDriver(this, named(MainWindow.SNIPER_STATUS_NAME)).hasText(equalTo(statusText.getText()));
 	}
 
 	public void dispose() {
