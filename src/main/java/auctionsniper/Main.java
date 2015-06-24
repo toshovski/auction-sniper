@@ -11,7 +11,7 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.ui.MainWindow;
 
-public class Main implements SniperListener {
+public class Main  {
 	public static final String MAIN_WINDOW_NAME = "Sniper Auction";
 
 	private static final int ARG_HOSTNAME = 0;
@@ -44,18 +44,10 @@ public class Main implements SniperListener {
 		disconnectWhenUICloses(connection);
 		final Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),null);
 
-		Auction auction = new Auction(){
-			public void bid(int amount) {
-				try {
-					chat.sendMessage(String.format(BID_COMMAND_FORMAT, amount));
-				} catch (XMPPException e) {
-					e.printStackTrace();
-				}
-			};
-		};
-		
-		chat.addMessageListener(new AuctionMessageTranslator(new AuctionSniper(auction,this)));
-		chat.sendMessage(JOIN_COMMAND_FORMAT);
+		Auction auction = new XMPPAuction(chat);
+		chat.addMessageListener(new AuctionMessageTranslator(new AuctionSniper(auction,new SniperStateDisplayer())));
+		auction.join();
+
 		this.notToBeGCd = chat;
 	}
 
@@ -91,26 +83,60 @@ public class Main implements SniperListener {
 			}
 		});
 	}
+	public class SniperStateDisplayer implements SniperListener{
+		
 
 	@Override
 	public void sniperLost() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				ui.showStatus(Status.LOST);
-			}
-		});
+		showStatus(Status.LOST);
 	}
 
 	@Override
 	public void sniperBidding() {
+		showStatus(Status.BIDDING);
+
+	}
+
+	@Override
+	public void sniperWinning() {
+		showStatus(Status.WINNING);
+		
+	}
+	
+	private void showStatus(Status status){
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				ui.showStatus(Status.BIDDING);
+				ui.showStatus(status);
 			}
 		});
-
 	}
+	}
+	
+	public class XMPPAuction implements Auction {
+        private final Chat chat;
+
+        public XMPPAuction(Chat chat) {
+            this.chat = chat;
+        }
+
+        @Override
+        public void bid(int amount) {
+            sendMessage(String.format(BID_COMMAND_FORMAT, amount));
+        }
+
+        @Override
+        public void join() {
+            sendMessage(JOIN_COMMAND_FORMAT);
+        }
+
+        private void sendMessage(String message) {
+            try {
+                chat.sendMessage(message);
+            } catch (XMPPException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 	

@@ -36,5 +36,7 @@ public class AuctionSniperTest {
 			one(auction).bid(price+increment);
 			atLeast(1).of(listener).sniperBidding();
 		}});
+		
+		sniper.currentPrice(price, increment);
 	}
 }
