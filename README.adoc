@@ -1,3 +1,5 @@
+image:http://img.shields.io/travis/{project-full-path}/{github-branch}.svg["Build Status", link="https://travis-ci.org/{project-full-path}"] 
+
 = goos-template
 
 Project template for GOOS example
