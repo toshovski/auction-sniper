@@ -23,11 +23,11 @@ public class Main implements SniperListener {
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/" + AUCTION_RESOURCE;
 
-	public static final String JOIN_COMMAND_FORMAT = 	"SOLVersion: 1.1; Command: JOIN;";
+	public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
 
-	public static final String BID_COMMAND_FORMAT = 	"SOLVersion: 1.1; Command: BID; Price: %s;";
-	public static final String REPORT_PRICE_FORMAT = 	"SOLVersion: 1.1; Event PRICE; CurrentPrice: %d; Increment: %d, Bidder: %s;";
-	public static final String CLOSE_COMMAND_FORMAT = 	"SOLVersion: 1.1; Event: CLOSE;";
+	public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %s;";
+	public static final String REPORT_PRICE_FORMAT = "SOLVersion: 1.1; Event PRICE; CurrentPrice: %d; Increment: %d, Bidder: %s;";
+	public static final String CLOSE_COMMAND_FORMAT = "SOLVersion: 1.1; Event: CLOSE;";
 
 	private MainWindow ui;
 
@@ -42,10 +42,21 @@ public class Main implements SniperListener {
 
 	private void joinAuction(XMPPConnection connection, int itemId) throws XMPPException {
 		disconnectWhenUICloses(connection);
-		final Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-				new AuctionMessageTranslator(new AuctionSniper(this)));
-		this.notToBeGCd = chat;
+		final Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),null);
+
+		Auction auction = new Auction(){
+			public void bid(int amount) {
+				try {
+					chat.sendMessage(String.format(BID_COMMAND_FORMAT, amount));
+				} catch (XMPPException e) {
+					e.printStackTrace();
+				}
+			};
+		};
+		
+		chat.addMessageListener(new AuctionMessageTranslator(new AuctionSniper(auction,this)));
 		chat.sendMessage(JOIN_COMMAND_FORMAT);
+		this.notToBeGCd = chat;
 	}
 
 	private void disconnectWhenUICloses(XMPPConnection connection) {
@@ -81,19 +92,25 @@ public class Main implements SniperListener {
 		});
 	}
 
-	
-
-	public void currentPrice(int price, int increment) {
-		
-	}
-
 	@Override
 	public void sniperLost() {
-		SwingUtilities.invokeLater( new Runnable(){
+		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				ui.showStatus(Status.LOST);
 			}
-});
+		});
+	}
+
+	@Override
+	public void sniperBidding() {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ui.showStatus(Status.BIDDING);
+			}
+		});
+
 	}
 }
+	
