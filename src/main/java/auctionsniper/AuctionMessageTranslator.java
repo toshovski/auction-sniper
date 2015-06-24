@@ -21,7 +21,6 @@ public class AuctionMessageTranslator implements MessageListener {
 	public void processMessage(Chat chat, Message message) {
 		AuctionEvent event = AuctionEvent.from(message.getBody());
 		String type = event.type();
-		System.out.println(type);
 		switch (type) {
 		case "CLOSE":
 			listener.auctionClosed();
